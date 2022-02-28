@@ -1,5 +1,11 @@
 import { graphql } from "gatsby"
 
+export const ParagraphBlogTeaser = graphql`
+  fragment ParagraphBlogTeaser on paragraph__blog_teasers {
+    id
+  }
+`
+
 export const ParagraphHeroCta = graphql`
   fragment ParagraphHeroCta on paragraph__hero_cta {
     drupal_id

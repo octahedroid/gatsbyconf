@@ -1,10 +1,19 @@
 import React from "react"
-import ParagraphHeroCta from "../components/paragraph-hero-cta";
-import ParagraphImage from "../components/paragraph-image";
-import ParagraphText from "../components/paragraph-text";
+
+import ParagraphBlogTeaser from "../components/paragraph/paragraph-blog-teasers";
+import ParagraphHeroCta from "../components/paragraph/paragraph-hero-cta";
+import ParagraphImage from "../components/paragraph/paragraph-image";
+import ParagraphText from "../components/paragraph/paragraph-text";
 
 const resolve = (component) => {
     // console.log(component);
+
+    if (component.__typename.includes(`paragraph__blog_teasers`)) {
+        return (
+            <ParagraphBlogTeaser />
+        )
+    }
+
     if (component.__typename.includes(`paragraph__hero_cta`)) {
         return (
             <ParagraphHeroCta 
@@ -17,7 +26,6 @@ const resolve = (component) => {
     }
 
     if (component.__typename.includes(`paragraph__image`)) {
-        
         return (
             <ParagraphImage 
                 image={component.relationships.field_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData}

@@ -20,7 +20,7 @@ export default function Post({ data: { node } }) {
     <Container>
       <Header />
       <article className="mx-auto">
-        {/* <Title>{node.title}</Title> */}
+        { node.field_show_title && <Title>{node.title}</Title> }
         {/* <Body 
           content={node.body.processed} 
         />
@@ -53,6 +53,7 @@ export const query = graphql`
     node: nodePage(id: {eq: $id}) {
       title
       created
+      field_show_title
       body {
         processed
       }
@@ -70,9 +71,10 @@ export const query = graphql`
       relationships {
         field_components {
           __typename
+          ...ParagraphBlogTeaser
           ...ParagraphHeroCta
-          ...ParagraphText
           ...ParagraphImage
+          ...ParagraphText
         }
       }
     }

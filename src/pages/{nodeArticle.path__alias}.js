@@ -72,6 +72,8 @@ export const query = graphql`
 
 export async function config() {
   // GraphQL Query
+  // - Fetch allNodeArticle filtered by field_rendering_mode equals to DSG
+  // - Any other(s) filter(s) could be implemented as an example by creation date to only SSG latest 100 and DSG all the others
   const { data } = graphql`  
   {
     dsgArticles: allNodeArticle (filter:{field_rendering_mode:{eq:"DSG"}}) {
