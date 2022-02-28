@@ -1,0 +1,39 @@
+{
+  "name": "gatsby-blog-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gatsby Blog Demo",
+  "author": "Stefano Verna",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.2",
+    "autoprefixer": "^10.4.2",
+    "classnames": "^2.3.1",
+    "dom-parser": "^0.1.6",
+    "dotenv": "^16.0.0",
+    "gatsby": "^4.8.1",
+    "gatsby-plugin-image": "^2.8.1",
+    "gatsby-plugin-postcss": "^5.8.0",
+    "gatsby-plugin-react-helmet": "^5.8.0",
+    "gatsby-plugin-sharp": "^4.8.1",
+    "gatsby-source-drupal":"^5.8.1",
+    "gatsby-source-drupal-menu-links":"^3.0.1",
+    "gatsby-transformer-sharp": "^4.8.0",
+    "postcss": "^8.4.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
+    "react-html-parser":"^2.0.2",
+    "react-uuid": "^1.0.2",
+    "tailwindcss": "^3.0.23"
+  }
+}
