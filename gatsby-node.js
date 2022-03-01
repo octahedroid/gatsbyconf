@@ -1,22 +1,6 @@
 const path = require('path')
-
-// Download remote images
+const { inlineImagesFieldExtractor } = require(`./src/helpers/node-body-parser`)
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
-// Parse Dom to find inline images
-const DomParser = require("dom-parser")
-const inlineImageParser = new DomParser()
-
-const calculateBody = (node) => {
-  if (node.field_body && node.field_body.processed) {
-    return node.field_body.processed;
-  }
-
-  if (node.body && node.body.processed) {
-    return node.body.processed;
-  }
-
-  return null;
-};
 
 exports.onCreateNode = async ({
   createNodeId,
@@ -30,56 +14,57 @@ exports.onCreateNode = async ({
 
   const contentTypes = ['node__page', 'node__article'];
   if (contentTypes.includes(node.internal.type)) {
-    let bodyContent = calculateBody(node);
-    if (bodyContent) {
-      const inlineImagesFields = inlineImageParser.parseFromString(bodyContent)
-      const inlineImages = inlineImagesFields.getElementsByTagName("img")
-      const nodeInlineImages = [];
-      inlineImages.forEach(inlineImage => {
-        inlineImage.attributes.forEach(async (inlineImageAttrs) => {
-          if (inlineImageAttrs.name === 'src') {
-            const imageUrl = `https://dev-gatsbyconf.pantheonsite.io${inlineImageAttrs.value}`;
-            nodeInlineImages.push({
-              relativePath: inlineImageAttrs.value,
-              remotePath: imageUrl
-            });
-          }
-        })
+    const { nodeBodyContent, nodeInlineImages } = inlineImagesFieldExtractor(node);
+    if (nodeInlineImages.length === 0) {
+      // Create bodyProcessedWithInlineImages field
+      createNodeField({
+        node, name: "bodyProcessedWithInlineImages",
+        value: nodeBodyContent
       });
-      if (nodeInlineImages.length > 0) {
-        const nodeInlineImageField = [];
-        for (const nodeInlineImage of nodeInlineImages) {
-          // Copied from gatsby-source-drupal
-          const fileNode = await createRemoteFileNode({
-            url: nodeInlineImage.remotePath,
-            name: path.parse(decodeURIComponent(nodeInlineImage.remotePath)).name,
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            getCache,
-          })
-          if (fileNode) {
-            nodeInlineImageField.push({
-              originalImageUrl: nodeInlineImage.relativePath,
-              localFile___NODE: fileNode.id,
-            })
-          }
-          createNodeField({
-            node, name: "bodyProcessedWithInlineImages",
-            value: bodyContent.replace(nodeInlineImage.relativePath, nodeInlineImage.remotePath)
-          });
-        }
-        if (nodeInlineImageField.length > 0) {
-          createNodeField({
-            node,
-            name: "inlineImages",
-            value: nodeInlineImageField,
-          });
-        }
-      } else {
-        createNodeField({ node, name: "bodyProcessedWithInlineImages", value: bodyContent });
+
+      return;
+    }
+
+    let bodyProcessedWithInlineImages = nodeBodyContent;
+    const inlineImageField = [];
+    for (const nodeInlineImage of nodeInlineImages) {
+
+      // Copied from gatsby-source-drupal
+      const fileNode = await createRemoteFileNode({
+        url: nodeInlineImage.remotePath,
+        name: path.parse(decodeURIComponent(nodeInlineImage.remotePath)).name,
+        store,
+        cache,
+        createNode,
+        createNodeId,
+        getCache,
+      })
+      // Copied from gatsby-source-drupal
+
+      if (fileNode) {
+        inlineImageField.push({
+          originalImageUrl: nodeInlineImage.relativePath,
+          localFile___NODE: fileNode.id,
+        })
       }
+
+      // Replace image relativePath with remotePath
+      bodyProcessedWithInlineImages = bodyProcessedWithInlineImages.replace(nodeInlineImage.relativePath, nodeInlineImage.remotePath);
+    }
+
+    // Create bodyProcessedWithInlineImages field
+    createNodeField({
+      node, name: "bodyProcessedWithInlineImages",
+      value: bodyProcessedWithInlineImages
+    });
+
+    // Create inlineImages field
+    if (inlineImageField.length > 0) {
+      createNodeField({
+        node,
+        name: "inlineImages",
+        value: inlineImageField,
+      });
     }
   }
 }

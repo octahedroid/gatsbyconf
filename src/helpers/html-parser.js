@@ -2,7 +2,7 @@ import React from "react";
 import ReactHtmlParser from "react-html-parser";
 import { GatsbyImage } from "gatsby-plugin-image";
 
-const htmlParser = (content, inlineImages = []) => {
+export const htmlParser = (content, inlineImages = []) => {
     const options = {
         decodeEntities: true,
         transform: (htmlnode) => {

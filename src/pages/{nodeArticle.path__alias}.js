@@ -22,7 +22,7 @@ export default function Post({ data: { node } }) {
           date={node.created}
           author={author}
         />
-        <Body content={node.body.processed} />
+        <Body content={node?.body?.processed} />
       </article>
       <SectionSeparator />
     </Container>

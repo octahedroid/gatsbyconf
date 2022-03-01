@@ -45,7 +45,7 @@ const resolve = (component) => {
     return <></>
 }
 
-const componentResolver = (data) => {
+export const componentResolver = (data = []) => {
     const components = []
 
     data.forEach((component) => {
