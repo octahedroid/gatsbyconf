@@ -8,7 +8,7 @@ export default function Post({ data: { node } }) {
   return (
     <Container>
       <Header />
-      <article>
+      <article className="prose prose-lg max-w-6xl mx-auto">
         <pre>
             { JSON.stringify(node, {}, 2) }
         </pre>

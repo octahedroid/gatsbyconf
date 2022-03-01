@@ -6,7 +6,7 @@ import Title from "./title";
 
 export default function Cover({ title, coverImage, date, author }) {
   return (
-    <>
+    <div className="prose prose-lg max-w-6xl mx-auto">
       <Title>{title}</Title>
       <div className="flex">
         <div className="md:block md:mb-12">
@@ -27,6 +27,6 @@ export default function Cover({ title, coverImage, date, author }) {
           <Avatar name={author?.name} picture={author?.picture} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
