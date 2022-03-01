@@ -2,7 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import Container from "../components/container";
 import Header from "../components/header";
-import SectionSeparator from "../components/section-separator";
+import Footer from "../components/footer";
 
 export default function Post({ data: { node } }) {
   return (
@@ -13,7 +13,7 @@ export default function Post({ data: { node } }) {
             { JSON.stringify(node, {}, 2) }
         </pre>
       </article>
-      <SectionSeparator />
+      <Footer />
     </Container>
   );
 }
