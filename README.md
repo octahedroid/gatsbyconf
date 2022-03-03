@@ -106,3 +106,47 @@ Update `Body` component to use previously added field
   content={node?.body?.processed}
 />
 ```
+
+> Check `gatsby-node.js` for code to replace image relativePath with remotePath
+
+## 3.B - Serve images as Gatsby Images
+
+Open page file:
+```
+src/pages/{nodePage.path__alias}.js
+```
+
+Add `inlineImages` field to GraphLQ Query
+```
+# GraphQL Customization Fields
+fields {
+    bodyProcessedWithInlineImages
+    inlineImages {
+      originalImageUrl
+      localFile {
+        childImageSharp {
+          gatsbyImageData(width: 1024)
+        }
+      }
+    }
+}
+```
+
+Replace original `Body` compoenent with `BodyParser`:
+
+```
+import BodyInlineImages from "../components/field/body-inline-images";
+```
+
+With the recently imported `BodyParser` component
+
+```
+<BodyInlineImages
+  content={node?.body?.processed}
+  inlineImages={node.fields.inlineImages}
+/>
+```
+
+> Check `gatsby-node.js` for code to replace image relativePath with remotePath
+
+---
