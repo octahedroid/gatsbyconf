@@ -6,7 +6,10 @@
 Use git to clone the code repository
 
 ```
-git clone  git@github.com:octahedroid/gatsbyconf.git
+git clone git@github.com:octahedroid/gatsbyconf.git 
+or 
+git clone https://github.com/octahedroid/gatsbyconf.git
+
 cd gatsbyconf
 ``` 
 
