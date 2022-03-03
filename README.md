@@ -384,7 +384,9 @@ Add a new `config` function to the page template
 export async function config() {
   // GraphQL Query
   // - Fetch allNodeArticle filtered by field_rendering_mode equals to DSG
-  // - Any other(s) filter(s) could be implemented as an example by creation date to only SSG latest 100 and DSG all the others
+  // - Any other(s) filter(s) you could implement:
+  //   - Articles created more than a year ago
+  //   - Articles with low traffic (integarte with your analytics data)
   const { data } = graphql`  
   {
     dsgArticles: allNodeArticle (filter:{field_rendering_mode:{eq:"DSG"}}) {
