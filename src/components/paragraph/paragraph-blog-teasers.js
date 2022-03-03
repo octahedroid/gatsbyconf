@@ -9,18 +9,18 @@ export default function ParagraphBlogTeasers() {
         <StaticQuery
             query={graphql`
             {
-            allArticles: allNodeArticle {
+              allArticles: allNodeArticle {
                 nodes {
-                id
-                title
-                created
-                path {
+                  id
+                  title
+                  created
+                  path {
                     alias
-                }
-                body {
+                  }
+                  body {
                     summary
-                }
-                relationships {
+                  }
+                  relationships {
                     field_author: uid {
                     field_full_name
                         relationships {
@@ -42,16 +42,16 @@ export default function ParagraphBlogTeasers() {
                             field_media_image {
                                 localFile {
                                     childImageSharp {
-                                        large: gatsbyImageData(width: 1500)
+                                        large: gatsbyImageData(width: 1240)
                                         small: gatsbyImageData(width: 760)
                                     }
                                 }
                             }
                         }
                     }
+                  }
                 }
-                }
-            }
+              }
             }
 
       `}

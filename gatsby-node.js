@@ -49,7 +49,10 @@ exports.onCreateNode = async ({
       }
 
       // Replace image relativePath with remotePath
-      bodyProcessedWithInlineImages = bodyProcessedWithInlineImages.replace(nodeInlineImage.relativePath, nodeInlineImage.remotePath);
+      bodyProcessedWithInlineImages = bodyProcessedWithInlineImages.replace(
+        nodeInlineImage.relativePath,
+        nodeInlineImage.remotePath
+      );
     }
 
     // Create bodyProcessedWithInlineImages field
