@@ -51,3 +51,27 @@ Add components to the page
   content={node?.body?.processed}
 />
 ```
+
+## 2.B - Show/Hide field title feature
+
+Open page file:
+```
+ src/pages/{nodePage.path__alias}.js
+```
+
+Add `field_show_title` to GraphLQ Query
+```
+    field_show_title
+```
+
+Replace original code:
+
+```
+<Title>{node.title}</Title>
+```
+
+With this code containing the field_show_title value validation to show/hide title
+
+```
+{ node.field_show_title && <Title>{node.title}</Title> }
+```
