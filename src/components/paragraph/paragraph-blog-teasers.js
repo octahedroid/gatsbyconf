@@ -2,7 +2,6 @@ import React from "react"
 import { StaticQuery, graphql } from "gatsby"
 import Teasers from "../teasers";
 
-
 export default function ParagraphBlogTeasers() {
 
     return (
