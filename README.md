@@ -97,8 +97,6 @@ Update `Body` component to use previously added field
 />
 ```
 
-
-
 ```
 <Body
   content={node?.body?.processed}
@@ -118,7 +116,6 @@ Add `inlineImages` field to GraphLQ Query
 ```
 # GraphQL Customization Fields
 fields {
-    bodyProcessedWithInlineImages
     inlineImages {
       originalImageUrl
       localFile {
@@ -130,7 +127,7 @@ fields {
 }
 ```
 
-Replace original `Body` compoenent with `BodyParser`:
+Replace original `Body` compoenent with `BodyInlineImages`:
 
 ```
 import BodyInlineImages from "../components/field/body-inline-images";
