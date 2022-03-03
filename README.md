@@ -6,8 +6,6 @@
 Use git to clone the code repository
 
 ```
-git clone git@github.com:octahedroid/gatsbyconf.git 
-or 
 git clone https://github.com/octahedroid/gatsbyconf.git
 
 cd gatsbyconf
@@ -282,7 +280,6 @@ Add `Cover` component to the page
   date={node.created}
   author={author}
 />
-<Body content={node?.body?.processed} />
 ```
 
 ## 5.B - Add CodeBlock Component
