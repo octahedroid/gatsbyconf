@@ -6,7 +6,6 @@ module.exports = {
     title: "GatsbyConf Drupal Demo",
   },
   plugins: [
-    `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-source-drupal`,
       options: {
@@ -20,6 +19,7 @@ module.exports = {
         menus: ["main"],
       },
     },
+    `gatsby-plugin-postcss`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
