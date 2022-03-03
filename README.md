@@ -75,3 +75,34 @@ With this code containing the field_show_title value validation to show/hide tit
 ```
 { node.field_show_title && <Title>{node.title}</Title> }
 ```
+
+## 3.A - Serve images from Drupal CMS
+
+Open page file:
+```
+ src/pages/{nodePage.path__alias}.js
+```
+
+Add `bodyProcessedWithInlineImages` field to GraphLQ Query
+```
+# GraphQL Customization Fields
+fields {
+  bodyProcessedWithInlineImages
+}
+```
+
+Update `Body` component to use previously added field
+
+```
+<Body
+  content={node.fields.bodyProcessedWithInlineImages}
+/>
+```
+
+
+
+```
+<Body
+  content={node?.body?.processed}
+/>
+```
