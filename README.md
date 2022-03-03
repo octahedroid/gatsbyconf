@@ -19,3 +19,32 @@ Start Gatsby on develop mode
 ```
 yarn develop
 ```
+
+## 2.A - Rendering field data
+
+Open page file:
+```
+src/pages/{nodePage.path__alias}.js
+```
+
+Remove JSON output
+```
+<pre>
+    { JSON.stringify(node, {}, 2) }
+</pre>
+```
+
+Import components
+```
+import Title from "../components/field/title";
+import Body from "../components/field/body";
+```
+
+Add components to the page 
+```
+<Title>{node.title}</Title>
+
+<Body
+  content={node?.body?.processed}
+/>
+```
